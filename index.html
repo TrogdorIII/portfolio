@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-au">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no, orientation=landscape" />
+    <title>Joshua Glavich</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="styles/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="main">
+
+        <div id="game" class="game-hidden">
+            <div id="score" class="score">0</div>
+            <div id="session-score" class="score">0</div>
+            <div id="high-score" class="score">0</div>
+            <div id="player-character-konami" class="display-none"></div>
+            <div id="player-character" class="first-jump">
+                <div id="player-character-hitbox"></div>
+            </div>
+            <div id="pause-screen" class="display-none">
+                <p>PAUSED</p>
+                <p id="pause-screen-hint">Did you know...</p>
+            </div>
+        </div>
+
+        <div id="console">
+
+            <div class="gamepad" id="gamepad-left">
+                <div>
+                    <button id="select-button" data-shortcode="select"></button>
+                    <div>
+                        <img class="joystick-background" src="images/anemone2 256 black.png" alt="Anemone">
+                        <button class="joystick neumorphic-shadow"></button>
+                    </div>
+                </div>
+                <div class="gamepad-middle">
+                    <div>
+                        <button class="cardinal-button neumorphic-shadow cardinal-button-north" data-shortcode="up" style="line-height: 1.8rem;">▴</button>
+                        <button class="cardinal-button neumorphic-shadow cardinal-button-east" data-shortcode="right">▸</button>
+                        <button class="cardinal-button neumorphic-shadow cardinal-button-south" data-shortcode="down">▾</button>
+                        <button class="cardinal-button neumorphic-shadow cardinal-button-west" data-shortcode="left">◂</button>
+                    </div>
+                </div>
+                <div style="flex:0"><button id="mute-button" data-shortcode="mute"></button></div>
+            </div>
+
+            <div id="screen">
+                <div>
+                    <div>
+                        <div id="image-viewer">
+                            <div id="info-panel">
+                                <div class="info-panel-hidden"><span class="info-panel-button interface-select-button"></span><span>?????</span></div>
+                                <div><span class="info-panel-button right-cardinal-button-color-east">A</span><span>Open</span></div>
+                                <div><span class="info-panel-button right-cardinal-button-color-south">B</span><span>Jump</span></div>
+                                <div><span class="info-panel-button right-cardinal-button-color-west">C</span><span>Attack</span></div>
+                                <div><span class="info-panel-button right-cardinal-button-color-north">D</span><span>Info</span></div>
+                                <div class="info-panel-hidden"><span class="info-panel-button interface-start-button"></span><span>Pause</span></div>
+                            </div>
+                            <div id="current-image-container">
+                                <div>
+                                    <button onclick="handleGamepadInput('left', true)"><</button>
+                                </div>
+                                <a id="current-image-url" target="_blank" rel="noopener noreferrer" href="">
+                                    <img id="current-image" src="images/job done.png" alt="Job Done!">
+                                    <div id="current-image-text">
+                                        <h1>Job Done!</h1>
+                                        <h2>https://monea-games.itch.io/job-done</h2>
+                                    </div>
+                                </a>
+                                <div id="credits" class="display-none">
+                                    <h1 style="margin-block-start: 1rem">Music</h1>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://youtube.com/@sharou">しゃろう</a>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://tallbeard.itch.io">Tallbeard Studios</a>
+                                    <h1>Sound Effects</h1>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://soundeffect-lab.info">効果音ラボ</a>
+                                    <h1>Minigame Art</h1>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://penzilla.itch.io">Penzilla</a>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://caz-creates-games.itch.io">Caz Creates Games</a>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://jesse-m.itch.io">Jesse Munguia</a>
+                                    <h1>Background Photo</h1>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://unsplash.com/@ka_idris">Kam Idris</a>
+                                    <h1 style="margin: 0"></h1>
+                                </div>
+                                <div>
+                                    <button onclick="handleGamepadInput('right', true)">></button>
+                                </div>
+                            </div>
+                            <div id="thumbnails">
+                                <img src="images/job done.png" alt="Job Done!" data-url="https://monea-games.itch.io/job-done">
+                                <img src="images/platform styx 2.png" alt="Platform Styx 2" data-url="https://monea-games.itch.io/platform-styx-2">
+                                <img src="images/stem.png" alt="STEM Explorer" data-url="https://www.2and2.com.au/portfolio/stemexplorer">
+                                <img src="images/friends must die.png" alt="Friends Must Die!" data-url="https://play.google.com/store/apps/details?id=com.wawagame.app.fmd">
+                                <img src="images/platform styx.png" alt="Platform Styx" data-url="https://monea-games.itch.io/platform-styx">
+                                <img src="images/couch crusade.png" alt="Couch Crusade" data-url="https://team-slouch.itch.io/couch-crusade">
+                                <img src="images/ready steady golf.png" alt="Ready Steady Go!f" data-url="https://monea-games.itch.io/ready-steady-golf">
+                                <img src="images/ome.jpg" alt="OME" data-url="https://monea-games.itch.io/ome-the-playable-demo">
+                                <img src="images/high and dry.png" alt="High and Dry" data-url="https://16t1studio2.itch.io/high-and-dry">
+                                <img id="credits-thumbnail" src="images/Black 1x1.png" />
+                            </div>
+                            <img id="mute-indicator" src="images/mute.png" alt="Mute" data-mute-image-url="images/mute.png" data-unmute-image-url="images/volume.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gamepad" id="gamepad-right">
+                <div>
+                    <button id="start-button" data-shortcode="start"></button>
+                    <div>
+                        <button class="cardinal-button neumorphic-shadow cardinal-button-north right-cardinal-button-color-north" data-shortcode="d">D</button>
+                        <button class="cardinal-button neumorphic-shadow cardinal-button-east right-cardinal-button-color-east" data-shortcode="a">A</button>
+                        <button class="cardinal-button neumorphic-shadow cardinal-button-south right-cardinal-button-color-south" data-shortcode="b" style="line-height: 2rem;">B</button>
+                        <button class="cardinal-button neumorphic-shadow cardinal-button-west right-cardinal-button-color-west" data-shortcode="c">C</button>
+                    </div>
+                </div>
+                <div class="gamepad-middle">
+                    <div>
+                        <img class="joystick-background" src="images/anemone2 256 black.png" alt="Anemone">
+                        <button class="joystick neumorphic-shadow"></button>
+                    </div>
+                </div>
+                <div style="flex:0"><button id="power-button" data-shortcode="power"></button></div>
+            </div>
+
+        </div>
+    </div>
+
+    <audio preload="auto" type="audio/mp3" id="audio-click" src="audio/決定ボタンを押す50.mp3" data-volume="0.1"></audio>
+    <audio preload="auto" type="audio/mp3" id="audio-move-selection" src="audio/決定ボタンを押す7.mp3" data-volume="0.4"></audio>
+    <audio preload="auto" type="audio/mp3" id="audio-power-on" src="audio/決定ボタンを押す22.mp3" data-volume="0.4"></audio>
+    <audio preload="auto" type="audio/mp3" id="audio-power-off" src="audio/決定ボタンを押す40.mp3" data-volume="0.4"></audio>
+    <audio preload="auto" type="audio/mp3" id="audio-jump" src="audio/パッ.mp3" data-volume="0.3"></audio>
+    <audio preload="auto" type="audio/mp3" id="audio-attack" src="audio/剣の素振り1.mp3" data-volume="0.3"></audio>
+    <audio preload="auto" type="audio/mp3" id="audio-death" src="audio/重いパンチ3.mp3" data-volume="0.2"></audio>
+    <audio preload="auto" type="audio/mp3" id="audio-enemy-death" src="audio/打撃1.mp3" data-volume="0.3"></audio>
+    <audio preload="auto" type="audio/mp3" id="audio-projectile-death" src="audio/Quack Sound Effect.mp3" data-volume="0.1"></audio>
+    <audio preload="auto" type="audio/mp3" id="audio-pause" src="audio/カーソル移動8.mp3" data-volume="0.4"></audio>
+    <audio loop autoplay preload="auto" type="audio/mp3" id="audio-bgm-main" src="audio/music/2 23_AM_2.mp3" data-volume="0.02"></audio>
+    <audio loop preload="auto" type="audio/mp3" id="audio-bgm-game" src="audio/music/SUMMER_TRIANGLE_2.mp3" data-volume="0.05"></audio>
+    <audio loop preload="auto" type="audio/mp3" id="audio-bgm-konami-ready" src="audio/music/魔力に満ちた部屋.mp3" data-volume="0.15"></audio>
+    <audio loop preload="auto" type="audio/mp3" id="audio-bgm-konami" src="audio/music/Ludum Dare 38 - Track 9.wav" data-volume="0.05"></audio>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
